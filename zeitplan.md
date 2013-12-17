@@ -35,6 +35,13 @@ Insgesamt stehen uns ca. 60 Unterrichtsstunden à 45min zur Verfügung.
 - Markdown (Vorstellung von Jannis)
 - Git & Github (Vorstellung von Leon)
 
+Vorarbeit in Gruppen:
+
+- Leon & Jannis (GitHub bis 20.12.)
+- Maxi & Sebastian (Python)
+- Tobias & Lukas (Lazarus->Python)
+- Bjarne & Leonid (Crazyflie)
+
 
 ## Implementierung
 
