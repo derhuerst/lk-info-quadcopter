@@ -69,8 +69,6 @@ print(hello, " ", world)
 
 a, b = 4, 9
 print(a+b)
-
-print
 ```
 
 Erzeugte Ausgabe:
@@ -86,18 +84,37 @@ Hello World
 
 ```python
 liste = []
+liste.append(1)
+liste.append(2)
+liste.append(3)
+print(liste[0])
+print(liste[1])
+print(liste[2])
+
+liste([1,2,3])
+print(liste[0])
+print(liste[1])
+print(liste[2])
 ```
 
 Erzeugte Ausgabe:
 
 ```
-
+1
+2
+3
+1
+2
+3
 ```
 
-### 
+### Operatoren
 
 ```python
-
+zahl = 1 + 2 * 3 / 4.0
+rest = 11 % 3
+quadrat = 7 ** 2
+hoch3 = 2 ** 3
 ```
 
 Erzeugte Ausgabe:
