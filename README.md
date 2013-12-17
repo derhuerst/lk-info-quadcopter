@@ -4,3 +4,4 @@ Der Informatik-Leistungskurs des [Herder-Gymnasiums](http://herder-oberschule.de
 
 - [Zeitplan & Überblick](zeitplan.md)
 - [Vereinbarungen zur Dokumentation](styleguide.md)
+- [Crazyflie Wiki](http://wiki.bitcraze.se/projects:crazyflie:index)
