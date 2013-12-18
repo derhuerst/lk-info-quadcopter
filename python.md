@@ -2,6 +2,10 @@
 
 Python ist eine Konsolenanwendung und unterstützt nativ keine GUI. Die folgende Referenz bezieht sich auf Python 3.
 
+- [Python3-Dokumentation](http://docs.python.org/3/) (englisch)
+- [Python3-Dokumentation](http://openbook.galileocomputing.de/python/) (deutsch)
+- [Schönes Python-Tutorial](http://www.learnpython.org/) (englisch)
+
 ## Grundstrukturen
 
 ### Kommentare
@@ -9,18 +13,18 @@ Python ist eine Konsolenanwendung und unterstützt nativ keine GUI. Die folgende
 Python unterstützt nur einzeilige Kommentare.
 
 ```python
-#Einzeiliger Kommentar
+# Einzeiliger Kommentar
 ```
 
 ### Ausgabe
 
-```python
-print("Hallo Welt!")
-print(123)
-print(input("Eingabe tätigen:"))
-```
+Die Ausgabe geschieht durch den Befehl ``print()``. Die Befehle werden nicht durch einen Zeilenumbruch separiert.
 
-Erzeugte Ausgabe:
+```python
+print("Hallo Welt!")             # String
+print(123)                       # Integer
+print(input("Eingabe tätigen:")) # String aus einem Input (ReadLn)
+```
 
 ```
 Hallo Welt!
@@ -43,8 +47,6 @@ print(x)
 mystring = "String 2 und schreib' ruhig Apostrophs"
 print(x)
 ```
-
-Erzeugte Ausgabe:
 
 ```
 7
@@ -72,8 +74,6 @@ a, b = 4, 9
 print(a+b)
 ```
 
-Erzeugte Ausgabe:
-
 ```
 3
 Hello World
@@ -97,8 +97,6 @@ print(liste[0])
 print(liste[1])
 print(liste[2])
 ```
-
-Erzeugte Ausgabe:
 
 ```
 1
@@ -141,8 +139,6 @@ ungerade_zahlen = [1, 3, 5, 7]
 alle_zahlen = gerade_zahlen + ungerade_zahlen
 print(alle_zahlen)
 ```
-
-Erzeugte Ausgabe:
 
 ```
 2
@@ -209,8 +205,6 @@ for i in range(10,1, -2):   #range(start, stop, step)
     print(i)
 ```
 
-Erzeugte Ausgabe:
-
 ```
 Raten Sie: 100 
 Raten Sie: 200 
@@ -254,8 +248,6 @@ def geheimeformel(a):
 
 print(geheimeformel(5))
 ```
-
-Erzeugte Ausgabe:
 
 ```
 Hallo von meiner Funktion!
