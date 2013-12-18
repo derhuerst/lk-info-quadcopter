@@ -6,12 +6,10 @@ Python ist eine Konsolenanwendung und unterstützt nativ keine GUI. Die folgende
 
 ### Kommentare
 
+Python unterstützt nur einzeilige Kommentare.
+
 ```python
 #Einzeiliger Kommentar
-
-""" Ein
-Blockkommentar
-mit mehreren Zeilen """
 ```
 
 ### Ausgabe
@@ -19,6 +17,7 @@ mit mehreren Zeilen """
 ```python
 print("Hallo Welt!")
 print(123)
+print(input("Eingabe tätigen:"))
 ```
 
 Erzeugte Ausgabe:
@@ -26,6 +25,8 @@ Erzeugte Ausgabe:
 ```
 Hallo Welt!
 123
+Eingabe tätigen: test
+test
 ```
 
 ### Variablentypen/-zuweisung
@@ -111,19 +112,54 @@ Erzeugte Ausgabe:
 ### Operatoren
 
 ```python
+zahl = 1 + 2 * 3 / 4
+print(zahl)
+zahl = 1 + 2 / 4 * 3
+print(zahl)
 zahl = 1 + 2 * 3 / 4.0
+print(zahl)
+zahl = 1 + 2 / 4.0 * 3
+print(zahl)
+
 rest = 11 % 3
+print(rest)
+
 quadrat = 7 ** 2
+print(quadrat)
+
 hoch3 = 2 ** 3
+print(hoch3)
+
+vieleHallo = "Hallo" * 5
+print(vieleHallo)
+
+vieleZahlen = [1, 2, 3] * 5
+print(vieleZahlen)
+
+gerade_zahlen = [2, 4, 6, 8]
+ungerade_zahlen = [1, 3, 5, 7]
+alle_zahlen = gerade_zahlen + ungerade_zahlen
+print(alle_zahlen)
 ```
 
 Erzeugte Ausgabe:
 
 ```
-
+2
+1
+2.5
+2.5
+2
+49
+8
+HalloHalloHalloHalloHallo
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+[2, 4, 6, 8, 1, 3, 5, 7]
 ```
 
-### Bedingungen
+### Kontrollstrukturen
+
+#### Bedingungen
 
 ```python
 x = 1
@@ -148,14 +184,83 @@ Es ist eine Eins
 Die Zahl gehört schon zu den Großen
 ```
 
-### 
+#### Schleifen
 
 ```python
+secret = 1337 
+guess = 0 
+while (guess != secret): 
+    guess = input("Raten Sie: ") 
+print("Sie haben es geschafft!")
 
+print("")
+
+for i in range(5):          #range(stop)
+    print(i)
+
+print("")
+
+for i in range(3,5):        #range(start, stop)
+    print(i)
+
+print("")
+
+for i in range(10,1, -2):   #range(start, stop, step)
+    print(i)
 ```
 
 Erzeugte Ausgabe:
 
 ```
+Raten Sie: 100 
+Raten Sie: 200 
+Raten Sie: 1337 
+Sie haben es geschafft!
 
+0
+1
+2
+3
+4
+
+3
+4
+
+10
+8
+6
+4
+2
+```
+
+### Funktionen
+
+```python
+meine_funktion()
+
+def meine_funktion():
+    print("Hallo von meiner Funktion!")
+    
+meine_funktion()
+
+def meine_funktion_args(name, gruss):
+    print("Hallo ", name, " von meiner Funktion! Ich wünsche dir ", gruss)
+
+meine_funktion_args("Hans", "Viel Erfolg!")
+meine_funktion_args("Lara", "Viel Spaß!")
+
+def geheimeformel(a):
+    return a*3+2     #Rückgabewert
+
+print(geheimeformel(5))
+```
+
+Erzeugte Ausgabe:
+
+```
+Hallo von meiner Funktion!
+Hallo von meiner Funktion!
+Hallo Hans von meiner Funktion! Ich wünsche dir Viel Erfolg!
+Hallo Lara von meiner Funktion! Ich wünsche dir Viel Spaß!
+17
 ```
