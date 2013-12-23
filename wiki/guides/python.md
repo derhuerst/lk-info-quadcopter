@@ -1,6 +1,6 @@
 # Python
 
-Python ist eine Konsolenanwendung und unterstützt nativ keine GUI. Die folgende Referenz bezieht sich auf Python 3.
+Python ist eine Konsolenanwendung und unterst├╝tzt nativ keine GUI. Die folgende Referenz bezieht sich auf Python 3.
 
 - [Python3-Dokumentation](http://docs.python.org/3/) (englisch)
 - [Python3-Dokumentation](http://openbook.galileocomputing.de/python/) (deutsch)
@@ -18,33 +18,38 @@ Python unterstützt nur einzeilige Kommentare.
 
 ### Ausgabe
 
-Die Ausgabe geschieht durch den Befehl ``print()``. Die Befehle werden nicht durch einen Zeilenumbruch separiert.
+Die Ausgabe geschieht durch den Befehl ``print()``. Die Befehle werden nicht durch einen Zeilenumbruch separiert. Der Dateityp als Parameter ist beliebi. Auch Objekte können übergeben werden, wenn sie eine Stringdarstellung besitzen.
+Falls mehrere Parameter angegeben werden, werden diese zu einem String zusammengefügt.
 
 ```python
 print("Hallo Welt!")             # String
 print(123)                       # Integer
+print(123, 456)                  # Integer
 print(input("Eingabe tätigen:")) # String aus einem Input (ReadLn)
 ```
 
 ```
 Hallo Welt!
 123
+123456
 Eingabe tätigen: test
 test
 ```
 
 ### Variablentypen/-zuweisung
 
+Der Dateityp einer Variable wird durch die Zuweisung festgelegt.
+
 ```python
-myint = 7
+myint = 7                                              # Integer
 print(x)
-myfloat = 7.0
+myfloat = 7.0                                          # Float
 print(x)
-myfloat = float(7)
+myfloat = float(7)                                     # Float
 print(x)
-mystring = 'String 1'
+mystring = 'String 1'                                  # String
 print(x)
-mystring = "String 2 und schreib' ruhig Apostrophs"
+mystring = "String 2 und schreib' ruhig Apostrophs"    # String
 print(x)
 ```
 
@@ -168,16 +173,16 @@ else:
     
 x = 6
 if (x>=6):
-    print("Die Zahl gehört schon zu den Großen")
+    print("Die Zahl geh├╢rt schon zu den Gro├ƒen")
 elif (x==6):
     print("Keiner mag mich!")
 else:
-    print("Ich kümmere mich um die Kleinen")
+    print("Ich k├╝mmere mich um die Kleinen")
 ```
 
 ```
 Es ist eine Eins
-Die Zahl gehört schon zu den Großen
+Die Zahl geh├╢rt schon zu den Gro├ƒen
 ```
 
 #### Schleifen
@@ -241,10 +246,10 @@ def meine_funktion_args(name, gruss):
     print("Hallo ", name, " von meiner Funktion! Ich wünsche dir ", gruss)
 
 meine_funktion_args("Hans", "Viel Erfolg!")
-meine_funktion_args("Lara", "Viel Spaß!")
+meine_funktion_args("Lara", "Viel Spa├ƒ!")
 
 def geheimeformel(a):
-    return a*3+2     #Rückgabewert
+    return a*3+2     #R├╝ckgabewert
 
 print(geheimeformel(5))
 ```
