@@ -4,7 +4,7 @@
 
 ### Drohne finden und Verbindung herstellen
 
-```
+```python
 cflib.crtp.init_drivers()
 available = cflib.crtp.scan_interfaces()
 for i in available:
@@ -18,10 +18,10 @@ crazyflie.close_link()
 
 ### Control Commands
 
-Diese control commands decken die wichtigstens und grundlegensten Methoden ab um die Drohne zu steuern.
+Diese control commands decken die wichtigsten und grundlegensten Methoden ab um die Drohne zu steuern.
 Für den Fall, dass dies nicht ausreicht, muss mit Logging und Parametern gearbeitet werden, was deutlich komplexer ist.
 
-```
+```python
 roll    = 0.0
 pitch   = 0.0
 yawrate = 0
@@ -45,7 +45,7 @@ sie werden nicht vom Client selbst verändert.
 
 Um eine logging configuration zu erstellen wird folgender Code verwendet:
 
-```
+```python
 logconf = LogConfig("Logging", 100)
 logconf.addVariable(LogVariable("group1.name1", "float"))
 logconf.addVariable(LogVariable("group1.name2", "uint8_t"))
@@ -59,7 +59,7 @@ Diese sind beide NICHT frei wählbar. (Dazu später mehr)
 
 Beispiel:
 
-```
+```python
 import logging
  
 import cflib.crtp
@@ -124,13 +124,13 @@ Main()
 ### Parameter
 
 Parameter können vom Client direkt geändert werden:
-```
+```python
 # crazyflie is an instance of the Crazyflie class that has been instantiated and connected
 crazyflie.param.setParamValue("led.freeze", True)
 ```
 
 Man kann vom Client aus Parameter auch von der Drohne abfragen:
-```
+```python
 crazyflie = Crazyflie()
 crazyflie.param.addParamUpdateCallback("led.freeze", paramUpdateCallback)
  
@@ -145,7 +145,7 @@ Wie auch beim Logging gibt es festgelegte Parameter (also in diesem Beispiel led
 An dieser Stelle ergibt sich ein kleines Problem: die Parameter und Loggingdaten sind nicht direkt Teil der
 Python Library, sondern sind Teil der Firmware der Drohne selbst, welche wir nicht direkt bearbeiten können.
 Es ist uns also nicht möglich, eigene Parameter oder Loggingdaten der Drohne hinzuzufügen. 
-Außerdem gibt es in der Hinsicht keine wirkliche Dokumentation in Hinsicht darauf, welche Parameter und Loggingwerte
+Außerdem gibt es  keine wirkliche Dokumentation hinsichtlich welche Parameter und Loggingwerte
 zur Verfügung stehen. Nach langer Suche haben wir den Teil des Quellcodes der Firmware gefunden, in welcher die meisten
 Parameter und Loggingdaten definiert werden. Für den Fall, dass Bedarf daran besteht diese einzusehen, haben wir aktuell keine
 andere Möglichkeit, als uns durch den entsprechenden Quellcode zuwühlen, welcher [Hier](https://bitbucket.org/bitcraze/crazyflie-firmware/src//modules/src/) 
