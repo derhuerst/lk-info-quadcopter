@@ -436,12 +436,13 @@ print(anderes_objekt.schlangenlaenge())
 ### Codelayout
 
 - Einrückungen betragen 4 Leerzeichen.
+
 ```python
 if indentation == 4:
-    dosomething()
+    pass
 ```
 - Jede Zeile hat höchstens 79 Zeichen.
-- Klassen und Methoden werden mit zwei freien Zeichen getrennt.
+- Toplevel-Funktionen und Klassendeklarationen werden mit zwei Leerzeilen getrennt.
 - Methodendefinitionen innerhalb einer Klasse werden mit einer Leerzeile getrennt.
 - Wir vereinbaren, dass wir Module, Klassen und Methoden immer nach folgendem Muster beschreiben
 
@@ -493,6 +494,7 @@ class TPython:
 Keine zusätzlichen Leerzeichen ...
 
 - ...innerhalb von Klammern  
+
 ```python
 #JA:
 spam(ham[1], {eggs: 2})
@@ -501,6 +503,7 @@ spam(ham[1], {eggs: 2})
 spam( ham[ 1 ], { eggs: 2 } )
 ```
 - ...vor einem Komma, Semikolon oder Punkt  
+
 ```python
 #JA:
 if x == 4: print x, y; x, y = y, x
@@ -508,7 +511,8 @@ if x == 4: print x, y; x, y = y, x
 #NEIN:
 if x == 4 : print x , y ; x , y = y , x
 ```
-- ...vor Klammern, die eine Parameterliste oder eine Indexliste starten.  
+- ...vor Klammern, die eine Parameterliste oder eine Indexliste starten.
+
 ```python
 #JA:
 x = fibb(array[5])
@@ -517,6 +521,7 @@ x = fibb(array[5])
 x = fibb (array [5])
 ```
 - ...als 1 um eine Zuweisung oder ähnliches, um mit anderem aus einer Höhe zu sein.
+
 ```python
 #JA:
 a = 5
@@ -532,7 +537,8 @@ langes_c = 2
 ### Kommentare
 - Der Code soll gründlich auskommentiert sein.
 - Kommentare sollten Englisch sein, wenn es sinnvoll ist.
-- Kommentarblöcke sollten sich auf der selben Ebene wie der folgende von ihnen beschriebene Code befinden. Jede Zeile eines Kommentarblocks beginnt mit '#' gefolgt von einem Leerzeichen. Paragraphen innerhalb eines Kommentarblocks werden mit einer Zeile getrennt, die nur ein '#' enthält
+- Kommentarblöcke sollten sich auf der selben Ebene wie der folgende von ihnen beschriebene Code befinden. Jede Zeile eines Kommentarblocks beginnt mit '#' gefolgt von einem Leerzeichen. Paragraphen innerhalb eines Kommentarblocks werden mit einer Zeile getrennt, die nur ein '#' enthält.
+
 ```python
 # Dies ist
 # ein Kommentarblock.
@@ -541,6 +547,7 @@ langes_c = 2
 # einen Absatz.
 ```
 - Kommentare in der selben Zeile sollten möglichst selten verwendet werden. Sie werden durch mindestens zwei Leerzeichen vom voranstehenden Code getrennt. Sie beginnen mit '#' gefolgt von einem einzigen Leerzeichen.
+
 ```python
 pass  # Dies ist ein Inlinekommentar.
 ```
@@ -557,7 +564,8 @@ pass  # Dies ist ein Inlinekommentar.
 - Bei Vererbung haben öffentliche Attribute keinen vorangestellten Unterstrich. Attribute, die nur vererbt werden solle, habenn einen Unterstrich vor dem Namen. Attribute die nicht vererbt werden sollen, haben zwei Unterstriche vor dem Namen.  
 Anmerkung: _Die Unterstriche haben allerdings keine Bedeutung für Python. Es sind alle Methoden/Variablen verfügbar._  
 Bsp.:
-```
+
+```python
 class TExampleClass:
 
 
