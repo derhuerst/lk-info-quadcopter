@@ -2,6 +2,8 @@
 
 Dieses Dokument fasst die am 2013-12-20 präsentierten Grundlagen für die Benutzung von Git und Github zusammen.
 
+Mir ist bewusst, dass dieser Guide ein schwierig zu folgender Crashkurs ist, deshalb hesitiert nicht zu fragen!
+
 ## Konzept hinter Git und Github
 
 
@@ -26,13 +28,13 @@ Im Repository befinden sich zum einen alle Projektdateien (der gesamte Projektba
 git pull
 ```
 
-Nun beginnt die Arbeit selbst: Dazu bearbeitet man einfach wie gewöhnlich die im Repository befindlichen Projektdateien. Z. b. implementiert man nach Herzenslust mit dem Lieblings-Texteditor ein neues Feature oder fixt einen Bug. Wenn man dabei neue Dateien erstellt, so muss man dies Git über den Befehl
+Nun beginnt die Arbeit selbst: Dazu bearbeitet man einfach wie gewöhnlich die im Repository befindlichen Projektdateien. Z. B. implementiert man nach Herzenslust mit dem Lieblings-Texteditor ein neues Feature oder fixt einen Bug. Wenn man dabei neue Dateien erstellt, so muss man dies Git über den Befehl
 
 ```bash
 git add beispielhafteNeueDatei.pas
 ```
 
-mitteilen. Man kan dem add-Befehl auch ganze Verzeichnisse, darunter auch . als Parameter übergeben. Will man eine Datei vom Projekt entfernen, so nutzt man dafür ganz ähnlich `git rm beispielDatei.pas` und löscht die Datei danach manuell. So weiß Git stets, welche Dateien es speichern soll, wenn man einen *Commit* erstellt:
+mitteilen. Man kan dem add-Befehl auch ganze Verzeichnisse, darunter auch `.`, als Parameter übergeben. Will man eine Datei vom Projekt entfernen, so nutzt man dafür ganz ähnlich `git rm beispielDatei.pas` und löscht die Datei danach manuell. So weiß Git stets, welche Dateien es speichern soll, wenn man einen *Commit* erstellt:
 
 Ist ein Feature erfolgreich implementiert -- d. h. insbesondere auch, dass nach Testen keine erkennbaren Fehler mehr auftreten -- oder ein Bug gefixt, so sagt man Git, dass es eine Art Momentaunahme des Repositorys als einen sogenannten *Commit* speichern soll. Zusätzlich zu einer solchen Momentaufnahme (dem Commit) wird der Name desjenigen, der diesen Commit erstellt hat, sowie eine kurze Nachricht, die den Commit beschreibt, gespeichert. Der Befehl dazu lautet
 
@@ -127,10 +129,10 @@ C1 --> C2 --> C3 --> C4
 Der master-Branch hat sich also wegen des C5-Commits von Mitarbeiter X von unserer bugfix40-Historie abgezweigt. Der checkout-befehl hat auch alle Dateien in unserem Repository geändert: Alle Änderungen, die in C4 gemacht wurden, sind verschwunden und dafür können wir nun die Änderungen, die Mitarbeiter X gemacht hat, bewundern. Unser Bugfix ist aber nicht verloren : Jetzt wollen wir beide wieder zusammenführen, genauer gesagt, wollen wir den bugfix40-Branch in den master-Branch *mergen*. Dazu führen wir 
 
 ```
-git merge bugfix40 -m "Beschreibung des Merges"
+git merge bugfix40
 ```
 
-aus. Gibt es keine Konflikte, so erstellt Git automatisch einen neuen Commit, der das "Kind" von C4 und C5 ist, mit der angegebenen Beschreibung, in etwa wie folgt.
+aus. Gibt es keine Konflikte, so öffnet Git ein Text-Editor-Fenster mit einer offenen Datei, in die man eine Commit-Nachricht eintragen sollte, die den Merge beschreibt. Dann speichert man und schließt den Text-Editor. Daraufhin erstellt Git automatisch einen neuen Commit, der das "Kind" von C4 und C5 ist, mit der angegebenen Beschreibung, in etwa wie folgt.
 
 ```
                  bugfix40
@@ -168,5 +170,80 @@ Die folgenden beiden Punkte sollen noch am Dienstag nach den Ferien besprochen w
 
 ## Die Github-Oberfläche
 
+Schaut sie euch an und probiert aus -- es kann kaum etwas kaputt gehen! Und fragt bei Fragen! Es erscheint mir ein wenig überflüssig, jede einzelne Schaltfläche und dessen Position und Funktion hier zu beschreiben.
 
 ## Unser Workflow
+
+Wie sollen wir die erlernten Technologien des Comittens und Branchings nun einstzen und sinnvoll die Mächtigkeit dieses Werkzeugs ausnutzen?
+
+Wir nutzen Themenbranches! Das sieht dann ungefähr so aus:
+
+```
+
+THEMENZWEIG       +---...---+---...---+---...---+----------
+                 /         /           \         \
+     MASTER  ==============================================
+                     \           \           /
+THEMENZWEIG           +---...-----+---...---+ (Thema abgeschlossen)
+
+```
+
+Parallel zum Master-Zweig laufen einige Themen-Zweige. Hin und wieder -- bei inhaltlich einigermaßen abgeschlossenen Ergebnissen -- werden die in den Master-Zweig gemerged, sodass dieser aus wenigen, größeren Änderungen besteht. Außerdem werden die Themen-Zweige hin und wieder geupdated, indem der Master-Zweig in sie gemerged wird, sodass die Entwicklung in den Themen-Zweigen nicht allzu weit voneinander abdriftet. Dabei kann innerhalb der Themenzweige soviel herumgewurschtelt werden, wie beliebt, angedeutet in der Zeichung durch "...". Es folgt nun ein beispielhaftes Szenario mit den zu nutzenden Befehlen.
+
+Alles beginnt auf dem Master-Zweig: Ein Team entschließt sich, mit dem Implementieren anzufangen, und erstellt dazu **lokal auf einem Rechner** einen neuen Zweig (und wechselt darauf) mit
+
+```
+git branch Thema1
+git checkout Thema1
+```
+
+Um den Zweig auf den Github-Server zu bekommen, führt man nun einmalig
+
+```
+git push origin Thema1
+git branch --set-upstream-to=origin/Thema1 Thema1
+```
+
+aus. Damit ein anderes Teammitglied den Zweig lokal auf seinem Rechner auch bearbeiten kann, führt es nun einmalig
+
+```
+git fetch
+git branch Thema1 origin/Thema1
+(git checkout Thema1)
+```
+
+aus. Nun beginnt die Arbeit auf dem Zweig Thema1. Dabei werden wie immer Commits erstellt. Wenn man anfängt zu arbeiten, holt man sich die neu gemachten Änderungen der Anderen mit `git pull` auf den Rechner (dafür muss man auf dem Thema1-Branch sein, also `git checkout Thema1` davor ausgeführt haben). Auch das Teilen mit den Anderen funktioniert ganz einfach mit `git push`, wenn man sich gerade auf dem Thema1-Zweig befindet.
+
+Sollte nun, während man am Thema1-Zweig arbeitet, jemand Anderes den Thema1-Zweig auf dem Server verändert haben (weil er einfach weitergearbeitet hat), so funktioniert `git push` nicht. Es erscheint eine Fehlermeldung wie
+
+```
+To https://github.com/derhuerst/lk-info-quadcopter.git
+ ! [rejected]        Thema1 -> Thema1 (non-fast-forward)
+error: Fehler beim Versenden einiger Referenzen nach 'https://github.com/derhuerst/lk-info-quadcopter.git'
+Hinweis: Aktualisierungen wurden zurückgewiesen, weil die Spitze deines aktuellen
+Hinweis: Zweiges hinter seinem externen Gegenstück zurückgefallen ist. Führe die
+Hinweis: externen Änderungen zusammen (z.B. 'git pull') bevor du erneut versendest.
+Hinweis: Siehe auch die Sektion 'Note about fast-forwards' in 'git push --help'
+Hinweis: für weitere Details.
+```
+
+Netterweise sagt Git uns auch, wie wir das beheben: Wir holen uns die neuen Änderungen mit `git pull` herunter. Dabei beginnt Git dann schlauerweise gleich, die neuen Änderungen mit unseren zu mergen; das verläuft genauso, wie zuvor beschrieben. Entweder es läuft alles glatt und Git erstellt gleich einen neuen Commit (dabei wird -- nicht erschrecken -- ein Text-Editor-Fenster geöffnet, in das man eine Commit-Nachricht schreiben soll, die Datei dann abspeichert und den Editor wieder schließt) oder Git berichtet 
+
+```
+...
+automatische Zusammenführung von datei1
+KONFLIKT (Inhalt): Zusammenführungskonflikt in datei1
+Automatische Zusammenführung fehlgeschlagen; behebe die Konflikte und trage dann das Ergebnis ein.
+```
+
+Dabei werden wie oben beschrieben Markierungen der Form
+
+```
+<<<<<<< HEAD
+Code-Variante1
+=======
+Code-Variante2
+>>>>>>>
+```
+
+in den betroffenen Dateien erstellt. Man öffnet also diese Dateien und wählt den richtigen Part aus. Dann erfolgt ein `git commit -am "Parallele Arbeit am Thema1-Zweig zusammengeführt"` und danach kann man `git push` ausführen.
