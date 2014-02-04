@@ -10,7 +10,17 @@ import acc_printer
 
  
 class control:
+    """
+    Represents a control. Execute commands and close it at the end.
+    """
     def __init__(self, methodSetupFinished):
+        """
+        Constructor
+        Connect to the crazyflie; runs the setup method in a new thread;
+        finally calls a custom method (in the interface)
+
+        @param methodSetupFinished method():void method called after setup finished
+        """
         self.methodSetupFinished = methodSetupFinished
         self.crazyflie = Crazyflie()
         cflib.crtp.init_drivers()
@@ -21,25 +31,35 @@ class control:
         # Set up the callback when connected
         self.crazyflie.connectSetupFinished.add_callback(self.connectSetupFinished)
  
-    def setup(self):
+    def _setup(self):
         self.sensors = sensors(self.crazyflie, 10)
         while not self.sensors.ready():
             time.sleep(0.1)
         self.methodSetupFinished()
 
-    def connectSetupFinished(self, linkURI):
+    def _connectSetupFinished(self, linkURI):
         # Start a separate thread to do the motor test.
         # Do not hijack the calling thread!
         Thread(target=self.setup).start() # Thread(target=self.pulse_command).start()
 
-    def command(self, string, duration):
+    def command(self, command, max_duration, *params):
+        """
+        Calls a command
+
+        @param command string command as a string
+        @param max_duration integer maximal duration of the command
+        @param params tupel multiple additional arguments dependig on the command
+        """
         if string == 'hover':
-            #hover.start(self.crazyflie, duration)
+            #hover.start(self, max_duration, *params)
             pass
         elif string == 'acc_printer':
-            acc_printer.start(self.crazyflie, duration)
+            acc_printer.start(self, max_duration, *params)
 
     def close(self):
+        """
+        Close the connecton to the crazyflie
+        """
         self.crazyflie.commander.send_setpoint(0, 0, 0, 0)
         # Make sure that the last packet leaves before the link is closed
         # since the message queue is not flushed before closing

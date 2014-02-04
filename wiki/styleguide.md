@@ -8,4 +8,12 @@ Texte wie dieser sollten als [Markdown](http://daringfireball.net/projects/markd
 
 ## Code (Inline-Dokumentation)
 
-TODO
+Aus dem Protokoll vom 17.01.14 geht folgende Dokumentation hervor.
+
+    """
+    Moeglicherweise mehrzeilige
+    ausfuehrliche Beschreibung
+
+    @param name typ beschreibung
+    @return name typ beschreibung
+    """

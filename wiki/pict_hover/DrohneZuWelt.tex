@@ -1,0 +1,40 @@
+\documentclass[border=1cm,varwidth=\maxdimen]{standalone}
+\usepackage[fleqn]{amsmath}
+
+\begin{document}
+	$ {}^{} $\newline
+	\begin{tabular}{ccrc}
+		\multicolumn{3}{c}{Weltkoordinatensystem} & $\begin{pmatrix}
+				cos(-\gamma)cos(-\beta) & -sin(-\gamma)cos(-\alpha)+cos(-\gamma)sin(-\beta)sn(-\alpha) & sin(-\gamma)sin(-\alpha)+cos(-\gamma)cos(-\alpha)sin(-\beta)\\
+				sin(-\gamma)cos(-\beta) & cos(-\gamma)cos(-\alpha)+sin(-\gamma)sin(-\beta)sin(-\alpha) & -cos(-\gamma)sin(-\alpha)+sin(-\gamma)sin(-\beta)cos(-\alpha)\\
+				-sin(-\beta) & cos(-\beta)sin(-\alpha) & cos(-\beta)cos(-\alpha)
+			\end{pmatrix}$ \\
+		\multicolumn{3}{c}{} & $\parallel$ \\
+		$z \downarrow$ & $z \uparrow$ & $R_{z}(-yaw)$ =& 
+		$\begin{pmatrix}
+			cos(-\gamma) & -sin(-\gamma) & 0\\
+			sin(-\gamma) & cos(-\gamma) & 0\\
+			0 & 0 & 1
+		\end{pmatrix} $ \\
+		\multicolumn{3}{c}{} & $\cdot$ \\
+		$y' \downarrow$ & $y' \uparrow$ & $R_{y}(-pitch)$ =& 
+		$\begin{pmatrix}
+			cos(-\beta) & 0 & sin(-\beta)\\
+			0 & 1 & 0\\
+			-sin(-\beta) & 0 & cos(-\beta)
+		\end{pmatrix} $ \\
+		\multicolumn{3}{c}{} & $\cdot $ \\
+		$x'' \downarrow$ & $x'' \uparrow$ & $R_{x}(-roll)$ =& 
+		$\begin{pmatrix}
+			1 & 0 & 0\\
+			0 & cos(-\alpha) & -sin(-\alpha)\\
+			0 & sin(-\alpha) & cos(-\alpha)
+		\end{pmatrix} $ \\
+		\multicolumn{3}{c}{} & $\cdot $ \\
+		\multicolumn{3}{c}{Drohnenkoordinatensystem} & $\begin{pmatrix}
+				1 & 0 & 0\\
+				0 & 1 & 0\\
+				0 & 0 & 1
+			\end{pmatrix}$ \\
+	\end{tabular}
+\end{document}

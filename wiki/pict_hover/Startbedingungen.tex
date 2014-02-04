@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+\usepackage[fleqn]{amsmath}
+
+\begin{document}
+	$ {}^{} $\newline
+	Neigung der Drohne:
+	\begin{flalign*}
+		gyro\_x &\overset{\wedge}{=} roll : "Neigung\: um\: die\: x-Achse"\\
+		gyro\_y &\overset{\wedge}{=} pitch : "Neigung\: um\: die\: y-Achse"\\
+		gyro\_z &\overset{\wedge}{=} yaw : "Drehung\: um\: die\: z-Achse"
+	\end{flalign*}\newline
+	Beschleunigung der Drohne:
+	\begin{flalign*}
+		{a}_{Drohne} &= \begin{pmatrix}
+			{a}_{Drohne;x}\\
+			{a}_{Drohne;y}\\
+			{a}_{Drohne;z}
+		\end{pmatrix}
+	\end{flalign*}\newline
+	Geschwindigkeit der Drohne:
+	\begin{flalign*}
+		{v}_{Drohne} &= {a}_{Drohne} \cdot t\\
+		&= \begin{pmatrix}
+			{a}_{Drohne;x} \cdot t\\
+			{a}_{Drohne;y} \cdot t\\
+			{a}_{Drohne;z} \cdot t
+		\end{pmatrix}
+	\end{flalign*}\newline
+	Zielgeschwindigkeit der Drohne:
+	\begin{flalign*}
+		{v}_{Ziel} &= \begin{pmatrix}
+			{v}_{Ziel;x}\\
+			{v}_{Ziel;y}\\
+			{v}_{Ziel;z}
+		\end{pmatrix}
+	\end{flalign*}\newline
+	Errechnete Ausgleichbewegung (Umsetzung durch Motoren):
+	\begin{flalign*}
+		{v}_{Gegen} &= \begin{pmatrix}
+			{v}_{Gegen;x}\\
+			{v}_{Gegen;y}\\
+			{v}_{Gegen;z}
+		\end{pmatrix}
+	\end{flalign*}
+\end{document}
