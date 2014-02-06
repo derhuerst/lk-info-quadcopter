@@ -1,41 +1,61 @@
-\documentclass[border=0.1cm,varwidth=\maxdimen]{standalone}
+\documentclass[border=0.5cm,varwidth=\maxdimen]{standalone}
 \usepackage[fleqn]{amsmath}
 
 \begin{document}
 	$ {}^{} $\newline
-	\begin{tabular}{crc}
-		\multicolumn{2}{c}{Weltkoordinatensystem} & $\begin{pmatrix}
-				1 & 0 & 0\\
-				0 & 1 & 0\\
-				0 & 0 & 1
-			\end{pmatrix}$ \\
-		\multicolumn{2}{c}{} & $\parallel$ \\
-		$z \downarrow$ & $R_{z}(-yaw)$ =& 
-		$\begin{pmatrix}
-			cos(-\gamma) & -sin(-\gamma) & 0\\
-			sin(-\gamma) & cos(-\gamma) & 0\\
+		
+	Drehung mit dem Winkel $\psi$ um eine z-Achse: \\
+	\begin{flalign*}
+		R_{z}(\psi) = 
+		\begin{pmatrix}
+			cos(\psi) & sin(\psi) & 0\\
+			-sin(\psi) & cos(\psi) & 0\\
 			0 & 0 & 1
-		\end{pmatrix} $ \\
-		\multicolumn{2}{c}{} & $\cdot$ \\
-		$y' \downarrow$ & $R_{y}(-pitch)$ =& 
-		$\begin{pmatrix}
-			cos(-\beta) & 0 & sin(-\beta)\\
+		\end{pmatrix}
+	\end{flalign*}\\
+	Drehung mit dem Winkel $\theta$ um eine y-Achse: \\
+	\begin{flalign*}
+		R_{y}(\theta) = 
+		\begin{pmatrix}
+			cos(\theta) & 0 & -sin(\theta)\\
 			0 & 1 & 0\\
-			-sin(-\
-			beta) & 0 & cos(-\beta)
-		\end{pmatrix} $ \\
-		\multicolumn{2}{c}{} & $\cdot $ \\
-		$x'' \downarrow$ & $R_{x}(-roll)$ =& 
-		$\begin{pmatrix}
+			sin(\theta) & 0 & cos(\theta)
+		\end{pmatrix}
+	\end{flalign*}\\
+	Drehung mit dem Winkel $\phi$ um eine x-Achse: \\
+	\begin{flalign*}
+		R_{x}(\phi) =
+		\begin{pmatrix}
 			1 & 0 & 0\\
-			0 & cos(-\alpha) & -sin(-\alpha)\\
-			0 & sin(-\alpha) & cos(-\alpha)
-		\end{pmatrix} $ \\
-		\multicolumn{2}{c}{} & $\cdot $ \\
-		\multicolumn{2}{c}{Drohnenkoordinatensystem} & $\begin{pmatrix}
-				1 & 0 & 0\\
-				0 & 1 & 0\\
-				0 & 0 & 1
-			\end{pmatrix}$ \\
-	\end{tabular}
+			0 & cos(\phi) & sin(\phi)\\
+			0 & -sin(\phi) & cos(\phi)
+		\end{pmatrix}
+	\end{flalign*}\\
+	Gesamttransformationsmatrix bei einer Drehreihenfolge $\psi \rightarrow \theta \rightarrow \phi$ ("von rechts lesen") - \\entspricht einer Transformation vom geodätischen ins drohnenfeste Koordinatensystem:\\
+	\begin{flalign*}
+		{M}_{dg} &= R_{z}(\psi) \cdot R_{y}(\theta) \cdot R_{x}(\phi)\\
+		&= 
+		\begin{pmatrix}
+			1 & 0 & 0\\
+			0 & cos(\phi) & sin(\phi)\\
+			0 & -sin(\phi) & cos(\phi)
+		\end{pmatrix}
+		\cdot
+		\begin{pmatrix}
+			cos(\theta) & 0 & -sin(\theta)\\
+			0 & 1 & 0\\
+			sin(\theta) & 0 & cos(\theta)
+		\end{pmatrix}
+		\cdot
+		\begin{pmatrix}
+			cos(\psi) & sin(\psi) & 0\\
+			-sin(\psi) & cos(\psi) & 0\\
+			0 & 0 & 1
+		\end{pmatrix}\\
+		&=\begin{pmatrix}
+			cos(\theta)cos(\psi) & cos(\theta)sin(\psi) & -sin(\theta) \\
+			sin(\phi)sin(\theta)cos(\psi)-cos(\phi)sin(\psi) & sin(\phi)sin(\theta)sin(\psi)+cos(\phi)sin(\psi) & sin(\phi)cos(\theta) \\
+			cos(\phi)sin(\theta)cos(\psi)+sin(\phi)sin(\psi) & cos(\phi)sin(\theta)sin(\psi)-sin(\phi)cos(\psi) & cos(\phi)cos(\theta) \\
+		\end{pmatrix}
+	\end{flalign*}
 \end{document}

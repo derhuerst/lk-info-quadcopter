@@ -1,24 +1,29 @@
-\documentclass[border=1cm,varwidth=\maxdimen]{standalone}
+\documentclass[border=0.5cm,varwidth=\maxdimen]{standalone}
 \usepackage[fleqn]{amsmath}
 
 \begin{document}
-		$
-		\begin{pmatrix}
-			cos(-\gamma)cos(-\beta) & -sin(-\gamma)cos(-\alpha)+cos(-\gamma)sin(-\beta)sn(-\alpha) & sin(-\gamma)sin(-\alpha)+cos(-\gamma)cos(-\alpha)sin(-\beta)\\
-			sin(-\gamma)cos(-\beta) & cos(-\gamma)cos(-\alpha)+sin(-\gamma)sin(-\beta)sin(-\alpha) & -cos(-\gamma)sin(-\alpha)+sin(-\gamma)sin(-\beta)cos(-\alpha)\\
-			-sin(-\beta) & cos(-\beta)sin(-\alpha) & cos(-\beta)cos(-\alpha)
+	Wir transformieren den aktuellen Geschwindigkeitsvektor ${v}_{Drohne}$ vom drohnenfesten Koordinatensystem\\
+	in das geodätische Koordinatensystem:
+	\begin{flalign*}
+		{v}_{d;Drohne} = \begin{pmatrix}
+		{v}_{d;Drohne;x} \\
+		{v}_{d;Drohne;y} \\
+		{v}_{d;Drohne;z}
 		\end{pmatrix}
-		\cdot
-		\begin{pmatrix}
-			{v}_{Drohne;x}''\\
-			{v}_{Drohne;y}''\\
-			{v}_{Drohne;z}''
+	\end{flalign*} \\
+	Daraus entsteht folgede Gleichung: \\
+	\begin{flalign*}
+		{v}_{g;Drohne} &= {M}_{gd} \cdot {v}_{d;Drohne} \\
+		&=\begin{pmatrix}
+			cos(\theta)cos(\psi) & sin(\phi)sin(\theta)cos(\psi)-cos(\phi)sin(\psi) & cos(\phi)sin(\theta)cos(\psi)+sin(\phi)sin(\psi) \\
+			cos(\theta)sin(\psi) & sin(\phi)sin(\theta)sin(\psi)+cos(\phi)sin(\psi) & cos(\phi)sin(\theta)sin(\psi)-sin(\phi)cos(\psi) \\
+			-sin(\theta) & sin(\phi)cos(\theta) & cos(\phi)cos(\theta) \\
 		\end{pmatrix}
-		=
+		\cdot 
 		\begin{pmatrix}
-			{v}_{Drohne;x}\\
-			{v}_{Drohne;y}\\
-			{v}_{Drohne;z}
+		{v}_{d;Drohne;x} \\
+		{v}_{d;Drohne;y} \\
+		{v}_{d;Drohne;z}
 		\end{pmatrix}
-		$
+	\end{flalign*} \\
 \end{document}

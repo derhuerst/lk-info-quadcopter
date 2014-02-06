@@ -1,5 +1,7 @@
 # Hover-Mode
 
+von Sebastian
+
 Dieses Dokument beschreibt die theoretische Umsetzung eines Hover-Modes und die Umsetzung zwischen Drohne(-nbewegungsrichtung) und Welt(-bewegungsrichtung).
 
 ## Allgemein
@@ -18,17 +20,25 @@ Die **Zielgeschwindigkeit der Drohne** ist die anzusteuernde Richtgeschwindigkei
 
 ### Funktionsweise
 
-Wir nehmen die aktuelle Geschwindigkeit der Drohne und transformieren sie in das Weltkoordinatensystem. Nun haben wir den Geschwindigkeitsvektor der Drohne v<sub>Drohne</sub>, welcher in der unternstehenden Abbildung eingetragen ist.
+Wir nehmen die aktuelle Geschwindigkeit der Drohne und transformieren sie in das Weltkoordinatensystem (geogätisches Koordinatensystem). Nun haben wir den Geschwindigkeitsvektor der Drohne v<sub>Drohne</sub>, welcher in der unternstehenden Abbildung eingetragen ist.
 
 Zusammen mit dem Zielgeschwindigkeitsvektor v<sub>Ziel</sub> wird im zweiten Schritt die Ausgleichbewegung v<sub>Gegen</sub> bestimmt. 
 
-v<sub>Gegen</sub> im Weltkoordinatensystem wird jetzt mit den Motoren (*roll*, *pitch*, *thrust*; *yaw* nicht benötigt) umgesezt.
+v<sub>Gegen</sub> im geodätischen Koordinatensystem wieder ins drohnenfeste Koordinatensystem transformiert mit den Motoren (*roll*, *pitch*, *thrust*; *yaw* nicht benötigt) umgesezt.
 
 ![Koordinatensystem](pict_hover/3D-Koordinatensystem.png)
 
 ## 1. Schritt: Drohne zur Welt
 
-Die Drohne ist ein sich frei im Raum bewegendes Objekt, welches sich auch gekippt um Raum (im folgenden Welt genannt) befinden kann. Alle Angaben, die wir zur Drohne über Sensoren erhalten sind relativ zur Drohnenposition und -neigung. Möchten wir zum Beispiel nun wissen, in welche Richtung die Drohne sich gerade bewegt, müssen wir den Geschwindigkeitsvektor (zusammengesetzt aus v<sub>Drohne;x</sub>, v<sub>Drohne;y</sub> und v<sub>Drohne;z</sub>) vom Drohnenkoordinatensystem in das Weltkoordinatensystem übersetzen.
+Die Drohne ist ein sich frei im Raum bewegendes Objekt, welches sich auch gekippt im Raum (im folgenden "*geodatisches Koordinatensystem*" genannt) befinden kann. Alle Angaben, die wir zur Drohne über Sensoren erhalten sind relativ zur Drohnenposition und -neigung (im "*drohnenfesten Koordinatensystem*"). Möchten wir zum Beispiel nun wissen, in welche Richtung die Drohne sich gerade bewegt, müssen wir den Geschwindigkeitsvektor (zusammengesetzt aus v<sub>Drohne;x</sub>, v<sub>Drohne;y</sub> und v<sub>Drohne;z</sub>) vom drohnenfesten Koordinatensystem in das geodätische Koordinatensystem transformieren.
+
+Dabei drehen wir nicht den Vektor, sondern "nur" das Koordinatensystem. 
+
+###  Die Koordinatensysteme
+
+Das ***geodätische Koordinatensystem*** ist, wie der Name verrät, erdfest. Dabei wird normalerweise die **x-Richtung nach Norden** angenommen. Nach der Rechte-Hand-Regel ist dann die **y-Richtung nach Osten** und die **z-Richtung ZUM BODEN**. 
+
+Das ***drohnenfeste Koordinatensystem*** ist an der Drohne  festgemacht und der Ursprung befindet sich im Schwerpunkt des Koordinatensystems. die **x-Achse zeigt nach vorne**, die **y-Achse zeigt nach rechts** und die **z-Achse nach unten**. Wenn die Drohne beispielsweise die "Nase" hochnimmt, bewegt sich also das drohnenfeste Koordinatensystem mit und bei jeder Bewegung wird das drohnenfeste Koordinatensystem mitbewegt. 
 
 ### Theorie
 
@@ -36,11 +46,19 @@ Nach den Eulerschen Winkeln ergeben sich andere Transformationen, wenn man ander
 
 ### Mathematik
 
-Drehen wir vom Weltkoordinatensystem in das  Drohnenkoordinatensystem müssen wir folglich zuerst um die z-Achse (z; yaw), dann um die neue y-Achse (y'; pitch) und dann um die neue-neue x-Achse (x''; roll) drehen. Um diese Transformation rückgängig durchzuführen, müssen wir x also wiede zuerst zurück drehen (Messungen rückgängig gerade drehen). Daraus ergibt sich folgende Matrix (*yaw* entspricht *z*; *pitch* - *y*; *roll* - *x*):
+Die Matrizenmultiplikation ist eine nicht kommutative Gruppe. 
+
+Drehen wir vom geodätischen Koordinatensystem in das drohnenfeste Koordinatensystem müssen wir folglich zuerst um die z-Achse (z; yaw), dann um die neue y-Achse (y'; pitch) und dann um die neue-neue x-Achse (x''; roll) drehen. Dieser Vorgang ist im dritten Schritt genauer erklärt. Ich setze die dort erarbeitete Matrix vorraus, nimm sie erst einmal als korrekt hin.
+
+![WeltZuDrohneMatrix](pict_hover/WeltZuDrohneMatrix.png)
+
+Die Transformation vom drohnenfesten Koordinatensystem ins geodätische Koordinatensystem ist die entgegengesetzte Transformation zur Rücktransformation. Wir drehen also nicht Gier ~ Nick ~ Roll, sondern -Roll ~ -Nick ~ -Gier. Die zuletzt durchgeführte Transformation machen wir also mit dem negativen Winkel zuerst rückgängig. 
+
+In der Praxis jedoch ist es viel einfacher! Besitzt man eine Transformationsmatrix in eine Richtung, ist die Transformationsmartix in die anderere Richtung die transpornierte Matrix. Es gilt:
 
 ![DrohneZuWelt](pict_hover/DrohneZuWelt.png)
 
-Multipliziert man diese riesige Matrix mit einem Vektor im DKS ehält man diesen Vektor im WKS:
+Multipliziert man diese riesige Matrix mit einem Vektor im drohnenfesten Koordinatensystem erhält man diesen Vektor im geodätischen Koordinatensystem:
 
 ![DrohneZuWelt2](pict_hover/DrohneZuWelt2.png)
 
@@ -64,16 +82,24 @@ Die Gegenbewegung v<sub>G</sub> ist im Weltkoordinatensystem. Um sie sinnoll ver
 
 ### Rücktransformation
 
-Die Rücktransformation findet analog zu Transformation Drohne-Welt.
+Die Rücktransformation ist ähnlich zur Transformation vom drohnenfesten Koordinatensystem ins geodätische Koordinatensystem. Die Transformation M<sub>dg</sub> vom geodätischen ins drohnenfesten Koordinatensystem ist über die drei Eulerwinkel definiert:
 
-BERECHNUNGEN HIER EINFÜGEN
+- psi - Gierwinkel (Auslenkung aus der Nordrichtung; Drehung um z-Achse)
+- theta - Nickwinkel (Anhebung der "Nase" über die Erdhorizontale)
+- phi - Rollwinkel (Neigung der rechten Hälte nach unten)
 
-Multiplizieren wir die folgende Matrix mit einem Vektor aus dem Weltkoordinatesystem, erhalten wir diesen Vektor im Drohnenkoordinatensystem:
+![Lagewinkel-Drehung-WeltZuDrohne](pict_hover/Lagewinkel-Drehung-WeltZuDrohne.png)
 
-BERECHNUNGEN HIER EINFÜGEN
+Das geodätische Koordinatensystem ist das rote Koordinatensystem, wobei x<sub>g</sub> Richtung Norden, y<sub>g</sub> Richtung Osten und z<sub>g</sub> Richtung Erdmittelpunkt ausgerichtet ist. Um ins drohnenfeste Koordinatensystem zu gelagen, drehen wir zuerst um den Gierwinkel (die roten Winkel; um die z<sub>g</sub>-Achse mit psi); nun um den Nickwinkel (grün; um die k<sub>2</sub>-Achse mit dem Winkel theta); dann um den Rollwinkel (blau; um die x<sub>f</sub>-Achse mit dem Winkel phi).
 
-### Umsetzug in Motren
+![WeltZuDrohne](pict_hover/WeltZuDrohne.png)
 
-Nun teilen wir den Vektor in die Bestandteile auf. v<sub>G;x</sub> übersetzen wir mit zusätzlichem *roll* - wir multipizieren v<sub>G;x</sub> mit einem Balancefaktor und addiren es zu unserem bisherigem *roll*. Gleiches Prinzip führen wir mit v<sub>G;y</sub> und *pitch* durch, sowie mit v<sub>G;z</sub> und *thrust*.
+Multiplizieren wir die folgende Matrix mit einem Vektor aus dem geodätischen Koordinatensystem, erhalten wir diesen Vektor im drohnenfesten Koordinatensystem:
+
+![WeltZuDrohneVektor](pict_hover/WeltZuDrohneVektor.png)
+
+### Umsetzug in Motoren
+
+Nun teilen wir den Vektor in die Bestandteile auf. v<sub>d;Gegen;x</sub> übersetzen wir mit zusätzlichem *roll* - wir multipizieren v<sub>d;Gegen;x</sub> mit einem Balancefaktor und addiren es zu unserem bisherigem *roll*. Gleiches Prinzip führen wir mit v<sub>d;Gegen;y</sub> und *pitch* durch, sowie mit v<sub>d;Gegen;z</sub> und *thrust*.
 
 Als Balancefaktor haben wir bisher **noch keine für v<sub>G;x</sub> und v<sub>G;y</sub>** ausmachen können. Misst man alle 10ms, bietet sich allerdings **2500 für <sub>G;z</sub>** an.

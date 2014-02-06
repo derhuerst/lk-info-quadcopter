@@ -2,39 +2,12 @@
 \usepackage[fleqn]{amsmath}
 
 \begin{document}
-	$ {}^{} $\newline
-	\begin{tabular}{ccrc}
-		\multicolumn{3}{c}{Weltkoordinatensystem} & $\begin{pmatrix}
-				cos(-\gamma)cos(-\beta) & -sin(-\gamma)cos(-\alpha)+cos(-\gamma)sin(-\beta)sn(-\alpha) & sin(-\gamma)sin(-\alpha)+cos(-\gamma)cos(-\alpha)sin(-\beta)\\
-				sin(-\gamma)cos(-\beta) & cos(-\gamma)cos(-\alpha)+sin(-\gamma)sin(-\beta)sin(-\alpha) & -cos(-\gamma)sin(-\alpha)+sin(-\gamma)sin(-\beta)cos(-\alpha)\\
-				-sin(-\beta) & cos(-\beta)sin(-\alpha) & cos(-\beta)cos(-\alpha)
-			\end{pmatrix}$ \\
-		\multicolumn{3}{c}{} & $\parallel$ \\
-		$z \downarrow$ & $z \uparrow$ & $R_{z}(-yaw)$ =& 
-		$\begin{pmatrix}
-			cos(-\gamma) & -sin(-\gamma) & 0\\
-			sin(-\gamma) & cos(-\gamma) & 0\\
-			0 & 0 & 1
-		\end{pmatrix} $ \\
-		\multicolumn{3}{c}{} & $\cdot$ \\
-		$y' \downarrow$ & $y' \uparrow$ & $R_{y}(-pitch)$ =& 
-		$\begin{pmatrix}
-			cos(-\beta) & 0 & sin(-\beta)\\
-			0 & 1 & 0\\
-			-sin(-\beta) & 0 & cos(-\beta)
-		\end{pmatrix} $ \\
-		\multicolumn{3}{c}{} & $\cdot $ \\
-		$x'' \downarrow$ & $x'' \uparrow$ & $R_{x}(-roll)$ =& 
-		$\begin{pmatrix}
-			1 & 0 & 0\\
-			0 & cos(-\alpha) & -sin(-\alpha)\\
-			0 & sin(-\alpha) & cos(-\alpha)
-		\end{pmatrix} $ \\
-		\multicolumn{3}{c}{} & $\cdot $ \\
-		\multicolumn{3}{c}{Drohnenkoordinatensystem} & $\begin{pmatrix}
-				1 & 0 & 0\\
-				0 & 1 & 0\\
-				0 & 0 & 1
-			\end{pmatrix}$ \\
-	\end{tabular}
+	\begin{flalign*}
+		{M}_{gd} &= {M}_{dg}^{-1} = {M}_{dg}^{T}\\
+		&=\begin{pmatrix}
+			cos(\theta)cos(\psi) & sin(\phi)sin(\theta)cos(\psi)-cos(\phi)sin(\psi) & cos(\phi)sin(\theta)cos(\psi)+sin(\phi)sin(\psi) \\
+			cos(\theta)sin(\psi) & sin(\phi)sin(\theta)sin(\psi)+cos(\phi)sin(\psi) & cos(\phi)sin(\theta)sin(\psi)-sin(\phi)cos(\psi) \\
+			-sin(\theta) & sin(\phi)cos(\theta) & cos(\phi)cos(\theta) \\
+		\end{pmatrix}
+	\end{flalign*}
 \end{document}

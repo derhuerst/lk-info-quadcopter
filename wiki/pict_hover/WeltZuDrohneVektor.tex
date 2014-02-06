@@ -1,0 +1,29 @@
+\documentclass[border=0.5cm,varwidth=\maxdimen]{standalone}
+\usepackage[fleqn]{amsmath}
+
+\begin{document}
+	Wir transformieren den Geschwindigkeitsvektor ${v}_{Drohne}$ vom geodätischen Koordinatensystem\\
+	in das drohnenfeste Koordinatensystem:
+	\begin{flalign*}
+		{v}_{g;Gegen} = \begin{pmatrix}
+		{v}_{g;Gegen;x} \\
+		{v}_{g;Gegen;y} \\
+		{v}_{g;Gegen;z}
+		\end{pmatrix}
+	\end{flalign*} \\
+	Daraus entsteht folgede Gleichung: \\
+	\begin{flalign*}
+		{v}_{d;Gegen} &= {M}_{dg} \cdot {v}_{g;Gegen} \\
+		&=\begin{pmatrix}
+			cos(\theta)cos(\psi) & cos(\theta)sin(\psi) & -sin(\theta) \\
+			sin(\phi)sin(\theta)cos(\psi)-cos(\phi)sin(\psi) & sin(\phi)sin(\theta)sin(\psi)+cos(\phi)sin(\psi) & sin(\phi)cos(\theta) \\
+			cos(\phi)sin(\theta)cos(\psi)+sin(\phi)sin(\psi) & cos(\phi)sin(\theta)sin(\psi)-sin(\phi)cos(\psi) & cos(\phi)cos(\theta) \\
+		\end{pmatrix}
+		\cdot 
+		\begin{pmatrix}
+		{v}_{g;Gegen;x} \\
+		{v}_{g;Gegen;y} \\
+		{v}_{g;Gegen;z}
+		\end{pmatrix}
+	\end{flalign*} \\
+\end{document}
