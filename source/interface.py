@@ -2,8 +2,8 @@ import cf_control
 import time
 
 def testMethod():
-    for i in xrange(20):
-        time.sleep(0.1)
+    crazy.command('simple_flight', 750, 0, 0, 0, 41000)
+    crazy.command('hover', 3000, 0, 0, 0)
     crazy.close()
 
 crazy = cf_control.control(testMethod)
