@@ -1,13 +1,12 @@
-\documentclass[12pt]{article}
+\documentclass[border=0.5cm,varwidth=\maxdimen]{standalone}
 \usepackage[fleqn]{amsmath}
 
 \begin{document}
-	$ {}^{} $\newline
 	Neigung der Drohne:
 	\begin{flalign*}
-		gyro\_x &\overset{\wedge}{=} roll : "Neigung\: um\: die\: x-Achse"\\
-		gyro\_y &\overset{\wedge}{=} pitch : "Neigung\: um\: die\: y-Achse"\\
-		gyro\_z &\overset{\wedge}{=} yaw : "Drehung\: um\: die\: z-Achse"
+		stab\_roll &\overset{\wedge}{=}\text{phi ($\phi$): Gierwinkel (Auslenkung aus der Nordrichtung; Drehung um z-Achse)}\\
+		stab\_pitch &\overset{\wedge}{=}\text{theta ($\theta$): Nickwinkel (Anhebung der "Nase" über die Erdhorizontale)}\\
+		stab\_yaw &\overset{\wedge}{=}\text{psi ($\psi$): Rollwinkel (Neigung der rechten Hälte nach unten)}
 	\end{flalign*}\newline
 	Beschleunigung der Drohne:
 	\begin{flalign*}

@@ -8,6 +8,10 @@
 - [Steuerung der Drohne](guides/Crazyflie.md)
 - [Flugverhalten](guides/crazyflie_flugverhalten.md)
 
+## Flugbewegungen
+
+- [Hover-Mode](hover.md)
+
 ## Sonstiges
 
 - [Zeitplan](zeitplan.md)
