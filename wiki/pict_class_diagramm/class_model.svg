@@ -1,0 +1,20 @@
+<svg width="535" height="320" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Klassenmodell</title>
+
+
+  <path d="M160,10 l150,0 l0,75 l-60,0 a15,15 0 1 0 -30,0 l-60,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="235" y="45" style="text-anchor: middle">Drone</text>
+
+  <path d="M190,85 L85,200" style="stroke: #000; stroke-width:3; fill:#000;"/>
+  <path d="M85,200 l17.7,-9.3 l-10.1,-9.2 z" style="stroke: #000; stroke-width:3; fill:#000;"/>
+  <path d="M10,200 l150,0 l0,50 l-150,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="85" y="235" style="text-anchor: middle">Sensors</text>
+
+  <path d="M280,85 L385,200" style="stroke: #000; stroke-width:3; fill:#000;"/>
+  <path d="M385,200 l-17.7,-9.23 l10.1,-9.2 z" style="stroke: #000; stroke-width:3; fill:#000;"/>
+  <path d="M310,200 l150,0 l0,50 l-150,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="385" y="235" style="text-anchor: middle">Logging</text>
+
+ </g>
+</svg>

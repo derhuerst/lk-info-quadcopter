@@ -1,6 +1,6 @@
-# Stundenprotokoll für WOCHENTAG, den TT.MM.JJ
+# Stundenprotokoll fÃ¼r WOCHENTAG, den TT.MM.JJ
 
-Ersellt von VORNAME
+Erstellt von VORNAME
 
 ## Gliederung / heutige Ziele
 
@@ -20,7 +20,7 @@ Ersellt von VORNAME
 - ---
 - ---
 
-## Ziele für die nächte Stunde
+## Ziele fÃ¼r die nÃ¤chste Stunde
 
 1. ---
 2. ---

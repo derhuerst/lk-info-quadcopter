@@ -1,0 +1,28 @@
+<svg width="620" height="320" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Klassendiagrammbausteine</title>
+
+
+  <path d="M10,35 l600,0 l0,50 l-275,0 a25,25 0 1 0 -50,0 l-275,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="310" y="53" style="text-anchor: middle">Drone</text>
+
+  <path d="M10,85 l275,0 a25,25 0 1 1 50,0 l275,0 l0,50 l-75,0 a25,25 0 1 0 -50,0 l-250,0  a25,25 0 1 0 -50,0 l-175,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="310" y="103" style="text-anchor: middle">RPYTCombiner</text>
+
+  <path d="M10,135 l175,0 a25,25 0 1 1 50,0 l175,0 l0,50 l-175,0 l0,-25 l-50,0 l0,25 l-175,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="210" y="153" style="text-anchor: middle">VConverter</text>
+
+  <path d="M10,185 l175,0 l0,-25 l50,0 l0,25 l175,0 l0,50 l-75,0 l0,-25 l-50,0 l0,25 l-150,0 l0,-25 l-50,0 l0,25 l-75,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="210" y="203" style="text-anchor: middle">VCombiner</text>
+
+  <path d="M410,135 l75,0 a25,25 0 1 1 50,0 l75,0 l0,50 l-200,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="510" y="153" style="text-anchor: middle">Looping</text>
+
+  <path d="M10,235 l75,0 l0,-25 l50,0 l0,25 l75,0 l0,50 l-200,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="110" y="253" style="text-anchor: middle">Upwards</text>
+
+  <path d="M210,235 l75,0 l0,-25 l50,0 l0,25 l75,0 l0,50 l-200,0 z" style="stroke: #000; stroke-width:2; fill:#E6E6FA;"/>
+  <text x="310" y="253" style="text-anchor: middle">Circle</text>
+ </g>
+
+</svg>
