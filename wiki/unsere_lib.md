@@ -16,19 +16,19 @@ Zudem soll es noch eine zusätzliche **zentrale Ausgabestelle** (im Weiteren *Lo
 
 Daraus lässt sich folgendes Modell erstellen. Die Drohnenverwaltung erstellt eine *Sensors*-Instanz und eine *Logging*-Instanz und hat eine RPYT-Schnittstelle (hier *rund* dargestellt; im Gegensatz zu Vektoren *eckig*; weitere Schnittstellen nach gleichem Prinzip möglich) für Flugbewegungen.
 
-![Klassenmodell](pict_class_diagramm/class_model.svg)
+![Klassenmodell](https://rawgithub.com/derhuerst/lk-info-quadcopter/master/wiki/pict_class_diagramm/class_model.svg)
 
 Jede Flugbewegung hat genau einen Vater, an den er das aus den Kindern (je nach Flugbewegung 0-n Kinder) berechnete Ergebnis weiterleitet. So fragt die Elternklasse alle Kinder (also auch 0 möglich) über die Schnittstelle ein Ergebnis der Kinder ab.
 
 Wird ein Kombinierer beispielsweise von seinem Vater nach einem Ergebnis gefragt, fragt dieser wiederum all seine Kinder nach deren Ergebnis, fügt diese zusammen und gibt dies an seinen Vater zurück.
 
-![Plug-Modell](pict_class_diagramm/plug_model.svg)
+![Plug-Modell](https://rawgithub.com/derhuerst/lk-info-quadcopter/master/wiki/pict_class_diagramm/plug_model.svg)
 
 Hier zwei Beispiele, wie ein Baum während der Laufzeit zu einem bestimmten Zeitpunkt aussehen könnte:
 
-![Strukturbeispiel während der Laufzeit (Normal)](pict_class_diagramm/structure_example_normal.svg)
+![Strukturbeispiel während der Laufzeit (Normal)](https://rawgithub.com/derhuerst/lk-info-quadcopter/master/wiki/pict_class_diagramm/structure_example_normal.svg)
 
-![Strukturbeispiel während der Laufzeit (Vektoren)](pict_class_diagramm/structure_example_vector.svg)
+![Strukturbeispiel während der Laufzeit (Vektoren)](https://rawgithub.com/derhuerst/lk-info-quadcopter/master/wiki/pict_class_diagramm/structure_example_vector.svg)
 
 ## Klassendiagramm
 
