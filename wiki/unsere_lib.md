@@ -34,7 +34,7 @@ Hier zwei Beispiele, wie ein Baum während der Laufzeit zu einem bestimmten Zeit
 
 **TODO** 
 
-Hausaufgabe zum 11.03.14:
+Hausaufgabe:
 
  - Wie sieht eine Schnittstelle beispielhaft aus?
  	- Allgemein
@@ -43,76 +43,37 @@ Hausaufgabe zum 11.03.14:
 
 ## Umsetzung in Python
 
-**TODO** - Soll nach dem 11.03.14 ergänzt werden
-
-Mit Stand vom 08.03.14 existieren zwei Vorschläge. Der erste von Jannis stammende Vorschlag enthält drei Basisbausteinklasse (0/1/n-Kinder) von der alle anderen Flugbewegungen unabhängig von der Schnittstelle erben. Die Unterscheidung der Schnittstellen an die Vaterklasse entsteht durch eine Art Identifikation, z.B. einen String. Es könnte dann in etwa wie folgt aussehen:
+Jeder Baustein erbt von ``TBlock``. Hat ein Block Kinder, erbt er stattdessen von der davon abgeleiteten Klasse ``TBlockN``, die zusätzlich noch eine Liste von Kindern ``child_list`` und eine Methode zum Hinzufügen in diese Liste ``def add_child():`` implementiert. Die Klasse ``TVectorBlock`` gibt an, welche Schnittstelle der Baustein an seinen Vater übergibt. Hier können zusätzliche Methoden (abstakt) implementiert werden können. Ein Baustein erbt also nicht nur von ``TBlock`` bzw. von ``TBlockN``, sondern auch von der Klasse, die die Schnittstelle *nach oben* angibt.
 
 ```python
 
-class TBlock:
-	type = ""
-	allowed_type = ""
+class TBlock(object):
 	
-	def tick():
+	def tick(self):
 		pass
 	
-	...
-
 class TBlockN(TBlock):
 	child_list = []
 	
 	def addChild(self, child):
-		if child.type = self.allowed_type:
-			child_list.append(child)
-		else:
-			TypeError('Child is not the right type.')
-			
-	...
-	
-class TVKombinierer(TBlockN):
-	type = "Vector"
-	allowed_type = "Vector"
-	
-	...
-```
-
-Des Weiteren gab es noch einen andere Vorschlag von Sebastian, bei dem die Unterscheidung der Typen nicht durch Indentifikationsvariablen erreicht wird, sondern durch eine Vererbung, die es damit auch ermöglicht, eine Abfrage der Instanz zu machen. Benutzt wird hier die Pythons Funktionalität der Mehrfachvererbung. Es wäre auch möglich, das eine Flugbewegung zwei verschiedene Schnittstellen für mögliche Väter hat. Es kann, exemplarisch, einmal als eine an den Vater einen Vektor übergebene Flugbewegung und eine an den Vater RPYT übergebene Flugbewegung benutzt werden; zum Beispiel, falls eine Funktionalität mehrere Schnittstellen unterstützt oder sich intern beide Schnittstellen Hilfsmethoden teilen.
-
-Dieser Vorschlag kam aufgrund semantischer Gründe, sowie Flexibilität bedingt besser an.
-
-```python
-
-class TBlock:
-	pass
-	
-class TBlockN(TBlock):
-	child_list = []
-	
-	def addChild(self, child):
-		if accepted_instance(child):
-			child_list.append(child)
-		else:
-			TypeError('Child is not the right type.')
-			
-	def accepted_instance(child):
-		return False
+		child_list.append(child)
 		
 	...
 	
-class TVectorBlock:
-	
-	def tick_vector():
-		pass
+class TVectorBlock(object):
 		
 	...
 	
 class TVKombinierer(TVectorBlock, TBlockN):
+
+	def add_child(self, child):
+		if isinstance(child, TVectorBlock):
+			super(TVectorBlock, self).add_child(child)
+		else:
+			TypeError(child.__class__.__name__ + " is not a possible child type.")
 	
-	def accepted_instance(child): # Überschreiben der Methode (Angabe, welche Instanzen Kinder sein dürfen
-		return isinstance(child, TVectorBlock) # Dies ist unanhängig von der eigenen Vererbung
-		
-	def tick_vector(): # Implementation der Ticker-Methode
-		pass # Damit der Vater diese Klasse ansprechen kann
+	def tick(self):
+		pass      # Implementation der tick-Methode
 		
 	...
 ``` 
