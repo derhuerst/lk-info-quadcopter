@@ -1,5 +1,5 @@
-import block    # blocksystem is used
-import parentRPYT     # parentsystem is used
+from nameHier import block    # blocksystem is used
+from nameHier import parentRPYT     # parentsystem is used
 
 class ThrustRPYT(Block, ParentRPYT):
 '''
